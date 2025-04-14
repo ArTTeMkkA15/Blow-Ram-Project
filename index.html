@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Maszyna RAM</title>
+    <title>RAM Machine</title>
 </head>
-<body>
-    <div id="topBar">
+<body onload="createExit()">
+    <div class="topBar">
         Pasek górny
     </div>
     <main>
-        <div id="sideBar">
+        <div class="sideBar">
             Procesor i Memory
         </div>
-        <div id="mainPanel">
-            Taśmy i pole edycji
+        <div class="mainPanel">
+            <div class="enter"></div>
+            <div class="program"></div>
+            <div class="exit"></div>
         </div>
     </main>
     <footer></footer>
+    <script src="script.js"></script>
 </body>
 </html>
