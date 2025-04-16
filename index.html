@@ -4,20 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>RAM Machine</title>
 </head>
-<body onload="createExit()">
+<body onload="createOutputCells(), createInputCells()">
     <div class="topBar">
-        Pasek górny
+        <h2>RAM Machine - Daniel Syska, Artemiusz Kulikouski, Szymon Rosa</h2>
+        <ol class="barOptions">
+            <li class="option save"><i class="fa fa-save"></i></li>
+            <li class="option open"><i class="fa fa-file-o"></i></li>
+            <li class="option run">&#11208;</li>
+            <li class="option stop">&#9632;</li>
+            <li class="option step"><i class="fa fa-fast-forward"></i></li>
+            <li class="option kill">&#9679;</li>
+        </ol>
     </div>
     <main>
         <div class="sideBar">
             Procesor i Memory
         </div>
         <div class="mainPanel">
-            <div class="enter"></div>
+            <div class="inputArea">
+                <div class="maxLeft" onclick="maxLeft('i')">&#8676;</div>
+                <div class="leftArrow" onclick="arrowLeft('i')">&#129092;</div>
+                <div class="inputCells"></div>
+                <div class="rightArrow" onclick="arrowRight('i')">&#129094;</div>
+            </div>
             <div class="program"></div>
-            <div class="exit"></div>
+            <div class="outputArea">
+                <div class="maxLeft" onclick="maxLeft('o')">&#8676;</div>
+                <div class="leftArrow" onclick="arrowLeft('o')">&#129092;</div>
+                <div class="outputCells"></div>
+                <div class="rightArrow" onclick="arrowRight('o')">&#129094;</div>
+            </div>
         </div>
     </main>
     <footer></footer>
