@@ -1,57 +1,76 @@
-function createExit() {
-    let exit = document.querySelector(".exit");
-
-    let maxL = document.createElement("div");
-    maxL.className = "maxLeft";
-    let mLH = document.createElement("h1");
-    mLH.className = "mLH";
-    mLH.innerHTML = "&#11244;";
-    maxL.appendChild(mLH);
-
-    let arrowL = document.createElement("div");
-    arrowL.className = "leftArrow";
-    let arLH = document.createElement("h1");
-    arLH.className = "aLH";
-    arLH.innerHTML = "&#11207;";
-    arrowL.appendChild(arLH);
-
-    let arrowR = document.createElement("div");
-    arrowR.className = "rightArrow";
-    let arRH = document.createElement("h1");
-    arRH.className = "aRH";
-    arRH.innerHTML = "&#11208;";
-    arrowR.appendChild(arRH);
-
-    exit.appendChild(maxL);
-    exit.appendChild(arrowL);
-
-    let boxes = document.createElement("div");
-    boxes.className = "boxes";
+function createOutputCells() {
+    let cells = document.querySelector(".outputCells");
     for(let i = 1; i <= 99; i++) {
-        let box = document.createElement("div");
-        box.className = "box";
+        let cell = document.createElement("div");
+        cell.className = "cell";
+        cell.id = "o"+i;
 
         let input = document.createElement("input");
-        let inputBox = document.createElement("div");
+        let inputCell = document.createElement("div");
         input.className = "input";
-        inputBox.className = "inputBox";
+        inputCell.className = "inputCell";
 
         let header = document.createElement("h3");
-        let headerBox = document.createElement("div");
+        let headerCell = document.createElement("div");
         header.className = "header";
-        headerBox.className = "headerBox";
-        
+        headerCell.className = "headerCell";
         input.type = "number";
         input.disabled = "disabled";
         header.innerHTML = i;
 
-        headerBox.appendChild(header);
-        inputBox.appendChild(input);
-        box.appendChild(inputBox);
-        box.appendChild(headerBox);
-        boxes.appendChild(box);
+        headerCell.appendChild(header);
+        inputCell.appendChild(input);
+        cell.appendChild(inputCell);
+        cell.appendChild(headerCell);
+        cells.appendChild(cell);
     }
-    exit.appendChild(boxes);
+}
 
-    exit.appendChild(arrowR);
+function createInputCells() {
+    let cells = document.querySelector(".inputCells");
+    for(let i = 1; i <= 99; i++) {
+        let cell = document.createElement("div");
+        cell.className = "cell";
+        cell.id = "i"+i;
+
+        let input = document.createElement("input");
+        let inputCell = document.createElement("div");
+        input.className = "input";
+        inputCell.className = "inputCell";
+
+        let header = document.createElement("h3");
+        let headerCell = document.createElement("div");
+        header.className = "header";
+        headerCell.className = "headerCell";
+        input.type = "number";
+        input.disabled = "disabled";
+        header.innerHTML = i;
+
+        headerCell.appendChild(header);
+        inputCell.appendChild(input);
+        cell.appendChild(headerCell);
+        cell.appendChild(inputCell);
+        cells.appendChild(cell);
+    }
+}
+
+let focused = 6;
+
+function maxLeft(e) {
+    focused = 1;
+    focusedCell = document.getElementById(e + focused);
+    focusedCell.scrollIntoView();
+    focused = 6;
+}
+
+function arrowLeft(e) {
+    focused--;
+    focusedCell = document.getElementById(e + focused);
+    focusedCell.scrollIntoView();
+}
+
+function arrowRight(e) {
+    focused++;
+    focusedCell = document.getElementById(e + focused);
+    focusedCell.scrollIntoView();
 }
