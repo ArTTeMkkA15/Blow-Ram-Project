@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 body {
     background-color: rgb(151, 168, 199);
@@ -8,72 +9,127 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
     height: 100vh;
+
 }
 .topBar {
-    background: lightcoral;
+    background-color: rgb(192, 215, 218);
     width: 100%;
     height: 85px;
+    display: grid;
+    grid-column: 1fr;
+    grid-template-rows: 1fr 1fr;
 }
+.topBar h2 {
+    width: 100%;
+    background-color: rgb(126, 150, 201);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.barOptions {
+    background-color: rgb(216, 218, 223);
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.option {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+    cursor: pointer;
+}
+.save {
+    color: rgb(76, 104, 197);
+}
+.open {
+    color: orange;
+}
+.run, .stop, .step {
+    color: rgb(77, 77, 214);
+}
+.kill {
+    color: rgb(221, 17, 17);
+}
+.run, .stop, .kill {
+    font-size: 35px;
+}
+
 main {
     display: flex;
     background: lightpink;
+    width: 100%;
     height: 100%;
 }
 .sideBar {
     background: rgb(202, 215, 240);
+    width: 20%;
     height: 100%;
 }
 .mainPanel {
-    background: lightsalmon;
+    background: rgb(144, 148, 199);
+    width: 80%;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
     row-gap: 20px;
+    padding-left: 10%;
 }
 .program {
     height: 100%;
-    background-color: antiquewhite;
+    width: 100%;
+    background-color: rgb(192, 215, 218);
 }
-
-
-.enter, .exit {
+.inputArea, .outputArea {
     height: 100px;
-    background-color: rgb(85, 139, 211);
+    width: 100%;
+    background-color: rgb(80, 154, 250);
     display: flex;
     flex-direction: row;
+    overflow-x: hidden;
 }
 
-.leftArrow, .rightArrow, .maxLeft {
-    background-color: rgb(171, 211, 212);
-    border: outset 2px rgb(161, 161, 161);
-    height: 100%;
+.inputCells, .outputCells {
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.boxes {
-    display: flex;
-    width: 1000px;
     flex-direction: row;
-    overflow-y: hidden;
-    overflow-x: scroll;
+    overflow-x: hidden;
 }
-.box {
+.cell {
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;
 }
 
-.inputBox {
+.maxLeft, .leftArrow, .rightArrow {
+    height: 100%;
+    background-color: rgb(192, 215, 218);
+    border: rgb(172, 190, 192) outset 4px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    cursor: pointer;
+}
+.maxLeft:active, .leftArrow:active, .rightArrow:active {
+    background-color: rgb(161, 184, 187);
+    border: rgb(147, 172, 175) outset 4px;
+}
+
+.inputCell {
     padding: 5px;
+    display: flex;
+    align-items: center;
 }
 .input {
     padding: 3px;
+    height: 80%;
 }
 
-.headerBox {
+.headerCell {
     display: flex;
     justify-content: center;
     align-items: center;
