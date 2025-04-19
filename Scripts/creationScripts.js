@@ -54,6 +54,68 @@ function createInputCells() {
     }
 }
 
+function createEditorProgram() {
+    let programDiv = document.querySelector(".program");
+    
+    let table = document.createElement("table");
+    table.className = "codeTable";
+    programDiv.appendChild(table);
+
+    let thead = document.createElement("thead");
+    let headerRow = document.createElement("tr");
+    let headers = ["LN", "Label", "Instruction", "Argument", "Comment", "EC", "EP"];
+    
+    headers.forEach(headerText => {
+        let th = document.createElement("th");
+        th.innerText = headerText;
+        headerRow.appendChild(th);
+    });
+    
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    let tbody = document.createElement("tbody");
+    
+    for (let i = 1; i <= 25; i++) {
+        let row = document.createElement("tr");
+        
+        let lnCell = document.createElement("td");
+        lnCell.innerText = i; 
+        row.appendChild(lnCell);
+        
+        let labelCell = document.createElement("td");
+        labelCell.id = `label${i}`;
+        labelCell.contentEditable = "true";
+        row.appendChild(labelCell);
+
+        let instructionCell = document.createElement("td");
+        instructionCell.id = `instruction${i}`;
+        instructionCell.contentEditable = "true";
+        row.appendChild(instructionCell);
+
+        let argumentCell = document.createElement("td");
+        argumentCell.id = `argument${i}`;
+        argumentCell.contentEditable = "true";
+        row.appendChild(argumentCell);
+
+        let commentCell = document.createElement("td");
+        commentCell.contentEditable = "true";
+        row.appendChild(commentCell);
+
+        let ecCell = document.createElement("td");
+        ecCell.id = `ec${i}`;
+        row.appendChild(ecCell);
+
+        let epCell = document.createElement("td");
+        ecCell.id = `ep${i}`;
+        row.appendChild(epCell);
+        
+        tbody.appendChild(row);
+    }
+    
+    table.appendChild(tbody);
+}
+
 let focused = 6;
 
 function maxLeft(e) {
