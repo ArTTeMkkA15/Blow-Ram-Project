@@ -81,7 +81,7 @@ main {
 .program {
     height: auto;
     width: 100%;
-    background-color: rgb(192, 215, 218);
+    background: rgb(144, 148, 199);
 }
 .inputArea, .outputArea {
     height: 100px;
