@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Styles/style.css">
+    <link rel="stylesheet" href="Styles/edytor.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>RAM Machine</title>
 </head>
-<body onload="createOutputCells(), createInputCells()">
+<body onload="createOutputCells(), createInputCells(), createEditorProgram()">
     <div class="topBar">
         <h2>RAM Machine - Daniel Syska, Artemiusz Kulikouski, Szymon Rosa</h2>
         <ol class="barOptions">
@@ -30,7 +31,8 @@
                 <div class="inputCells"></div>
                 <div class="rightArrow" onclick="arrowRight('i')">&#129094;</div>
             </div>
-            <div class="program"></div>
+            <div class="program">
+            </div>
             <div class="outputArea">
                 <div class="maxLeft" onclick="maxLeft('o')">&#8676;</div>
                 <div class="leftArrow" onclick="arrowLeft('o')">&#129092;</div>
@@ -39,7 +41,7 @@
             </div>
         </div>
     </main>
-    <footer></footer>
-    <script src="script.js"></script>
+    <script src="Scripts/creationScripts.js"></script>
+    <script src="Scripts/procesor.js"></script>
 </body>
 </html>
