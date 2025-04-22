@@ -116,23 +116,26 @@ function createEditorProgram() {
     table.appendChild(tbody);
 }
 
-let focused = 6;
+let focused = 3;
 
 function maxLeft(e) {
     focused = 1;
     focusedCell = document.getElementById(e + focused);
     focusedCell.scrollIntoView();
-    focused = 6;
 }
 
 function arrowLeft(e) {
-    focused--;
+    focused-= 3;
+    if(focused <= 0) 
+        focused = 1;
     focusedCell = document.getElementById(e + focused);
     focusedCell.scrollIntoView();
+    focused++;
 }
 
 function arrowRight(e) {
-    focused++;
+    focused+= 3;
     focusedCell = document.getElementById(e + focused);
     focusedCell.scrollIntoView();
+    focused--;
 }
