@@ -137,3 +137,12 @@ function arrowRight(e) {
     focusedCell.scrollIntoView();
     focused--;
 }
+
+function readProcessor(){
+
+}
+
+function readMemory(){
+    let memoryInners = document.querySelector(".memory");
+    let adres = document.createElement("h1");
+}
