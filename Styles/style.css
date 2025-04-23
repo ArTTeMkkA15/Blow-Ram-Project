@@ -105,7 +105,7 @@ main {
     overflow-x: hidden;
 }
 
-.inputCells, .outputCells {
+#inputCells, #outputCells {
     display: flex;
     flex-direction: row;
     overflow-x: hidden;

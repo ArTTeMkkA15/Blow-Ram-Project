@@ -1,5 +1,5 @@
 function createOutputCells() {
-    let cells = document.querySelector(".outputCells");
+    let cells = document.querySelector("#outputCells");
     for(let i = 1; i <= 99; i++) {
         let cell = document.createElement("div");
         cell.className = "cell";
@@ -27,7 +27,7 @@ function createOutputCells() {
 }
 
 function createInputCells() {
-    let cells = document.querySelector(".inputCells");
+    let cells = document.querySelector("#inputCells");
     for(let i = 1; i <= 99; i++) {
         let cell = document.createElement("div");
         cell.className = "cell";
@@ -116,26 +116,29 @@ function createEditorProgram() {
     table.appendChild(tbody);
 }
 
-let focused = 3;
-
 function maxLeft(e) {
-    focused = 1;
-    focusedCell = document.getElementById(e + focused);
-    focusedCell.scrollIntoView();
+    cells = document.getElementById(e);
+    cells.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
 }
 
 function arrowLeft(e) {
-    focused-= 3;
-    if(focused <= 0) 
-        focused = 1;
-    focusedCell = document.getElementById(e + focused);
-    focusedCell.scrollIntoView();
-    focused++;
+    cells = document.getElementById(e);
+    cells.scrollBy({
+        top: 0,
+        left: -200,
+        behavior: "smooth"
+    });
 }
 
 function arrowRight(e) {
-    focused+= 3;
-    focusedCell = document.getElementById(e + focused);
-    focusedCell.scrollIntoView();
-    focused--;
+    cells = document.getElementById(e);
+    cells.scrollBy({
+        top: 0,
+        left: 200,
+        behavior: "smooth"
+    });
 }
