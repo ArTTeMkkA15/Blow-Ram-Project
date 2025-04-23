@@ -12,9 +12,9 @@
     <div class="topBar">
         <h2>RAM Machine - Daniel Syska, Artemiusz Kulikouski, Szymon Rosa</h2>
         <ol class="barOptions">
-            <li class="option save" onclick="save()"><i class="fa fa-save"></i></li>
-            <li class="option open"><input onchange="useFile()" type="file" class="file_upload" style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%; cursor:pointer;"/><i class="fa fa-file-o"></i></li>
-            <li class="option run" onclick="start()">&#11208;</li>
+            <li class="option save"><i class="fa fa-save"></i></li>
+            <li class="option open"><i class="fa fa-file-o"></i></li>
+            <li class="option run">&#11208;</li>
             <li class="option stop">&#9632;</li>
             <li class="option step"><i class="fa fa-fast-forward"></i></li>
             <li class="option kill">&#9679;</li>
@@ -26,22 +26,21 @@
         </div>
         <div class="mainPanel">
             <div class="inputArea">
-                <div class="maxLeft" onclick="maxLeft('inputCells')">&#8676;</div>
-                <div class="leftArrow" onclick="arrowLeft('inputCells')">&#129092;</div>
-                <div id="inputCells"></div>
-                <div class="rightArrow" onclick="arrowRight('inputCells')">&#129094;</div>
+                <div class="maxLeft" onclick="maxLeft('i')">&#8676;</div>
+                <div class="leftArrow" onclick="arrowLeft('i')">&#129092;</div>
+                <div class="inputCells"></div>
+                <div class="rightArrow" onclick="arrowRight('i')">&#129094;</div>
             </div>
             <div class="program">
             </div>
             <div class="outputArea">
-                <div class="maxLeft" onclick="maxLeft('outputCells')">&#8676;</div>
-                <div class="leftArrow" onclick="arrowLeft('outputCells')">&#129092;</div>
-                <div id="outputCells"></div>
-                <div class="rightArrow" onclick="arrowRight('outputCells')">&#129094;</div>
+                <div class="maxLeft" onclick="maxLeft('o')">&#8676;</div>
+                <div class="leftArrow" onclick="arrowLeft('o')">&#129092;</div>
+                <div class="outputCells"></div>
+                <div class="rightArrow" onclick="arrowRight('o')">&#129094;</div>
             </div>
         </div>
     </main>
-    <script src="Scripts/topBarScripts.js"></script>
     <script src="Scripts/creationScripts.js"></script>
     <script src="Scripts/procesor.js"></script>
 </body>

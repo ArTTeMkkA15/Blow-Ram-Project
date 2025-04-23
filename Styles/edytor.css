@@ -19,3 +19,12 @@
 .codeTable td[contenteditable="true"]:hover {
     background-color: rgb(240, 240, 240);
 }
+
+.codeTable select{
+    text-align: center;
+    border: solid rgb(80, 154, 250) 1px;
+    width: 100%;
+    border-collapse: collapse;
+    padding: 12px;
+    background-color: rgb(192, 215, 218);
+}
