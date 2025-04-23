@@ -47,11 +47,15 @@ body {
     justify-content: center;
     margin: 0 10px;
     width: 40px;
+    height: auto;
     cursor: pointer;
+    position: relative;
 }
 .option:hover {
-    border-radius: 5px;
     background-color: rgb(176, 178, 184);
+}
+.option:active {
+    background-color: rgb(159, 160, 165);
 }
 .save {
     color: rgb(76, 104, 197);
