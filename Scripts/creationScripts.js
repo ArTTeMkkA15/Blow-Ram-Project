@@ -1,5 +1,5 @@
 function createOutputCells() {
-    let cells = document.querySelector("#outputCells");
+    let cells = document.querySelector(".outputCells");
     for(let i = 1; i <= 99; i++) {
         let cell = document.createElement("div");
         cell.className = "cell";
@@ -27,7 +27,7 @@ function createOutputCells() {
 }
 
 function createInputCells() {
-    let cells = document.querySelector("#inputCells");
+    let cells = document.querySelector(".inputCells");
     for(let i = 1; i <= 99; i++) {
         let cell = document.createElement("div");
         cell.className = "cell";
@@ -63,7 +63,9 @@ function createEditorProgram() {
 
     let thead = document.createElement("thead");
     let headerRow = document.createElement("tr");
-    let headers = ["LN", "Label", "Instruction", "Argument", "Comment", "EC", "EP"];
+    let headers = ["LN", "Label", "Instruction", "Argument", "Comment"];
+    let instruction = [" ", "LOAD", "STORE", "ADD", "SUB", "MULT", "DIV", "READ", 
+        "WRITE", "JUMP", "JGTZ", "JZERO", "HALT"];
     
     headers.forEach(headerText => {
         let th = document.createElement("th");
@@ -76,7 +78,7 @@ function createEditorProgram() {
 
     let tbody = document.createElement("tbody");
     
-    for (let i = 1; i <= 25; i++) {
+    for (let i = 1; i <= 15; i++) {
         let row = document.createElement("tr");
         
         let lnCell = document.createElement("td");
@@ -88,10 +90,14 @@ function createEditorProgram() {
         labelCell.contentEditable = "true";
         row.appendChild(labelCell);
 
-        let instructionCell = document.createElement("td");
-        instructionCell.id = `instruction${i}`;
-        instructionCell.contentEditable = "true";
-        row.appendChild(instructionCell);
+        let selectInst = document.createElement("select");
+        selectInst.id = `instruction${i}`;
+        instruction.forEach(instruction => {
+            let optionInst = document.createElement("option");
+            optionInst.innerHTML = instruction;
+            selectInst.appendChild(optionInst);
+        });
+        row.appendChild(selectInst);
 
         let argumentCell = document.createElement("td");
         argumentCell.id = `argument${i}`;
@@ -101,14 +107,6 @@ function createEditorProgram() {
         let commentCell = document.createElement("td");
         commentCell.contentEditable = "true";
         row.appendChild(commentCell);
-
-        let ecCell = document.createElement("td");
-        ecCell.id = `ec${i}`;
-        row.appendChild(ecCell);
-
-        let epCell = document.createElement("td");
-        ecCell.id = `ep${i}`;
-        row.appendChild(epCell);
         
         tbody.appendChild(row);
     }
@@ -116,29 +114,99 @@ function createEditorProgram() {
     table.appendChild(tbody);
 }
 
+let focused = 3;
+
 function maxLeft(e) {
-    cells = document.getElementById(e);
-    cells.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
+    focused = 1;
+    focusedCell = document.getElementById(e + focused);
+    focusedCell.scrollIntoView();
 }
 
 function arrowLeft(e) {
-    cells = document.getElementById(e);
-    cells.scrollBy({
-        top: 0,
-        left: -200,
-        behavior: "smooth"
-    });
+    focused-= 3;
+    if(focused <= 0) 
+        focused = 1;
+    focusedCell = document.getElementById(e + focused);
+    focusedCell.scrollIntoView();
+    focused++;
 }
 
 function arrowRight(e) {
-    cells = document.getElementById(e);
-    cells.scrollBy({
-        top: 0,
-        left: 200,
-        behavior: "smooth"
-    });
+    focused+= 3;
+    focusedCell = document.getElementById(e + focused);
+    focusedCell.scrollIntoView();
+    focused--;
+}
+
+function readProcessor(){
+
+}
+
+function readMemory(){
+    let memoryInners = document.querySelector(".memory");
+    let memory = document.createElement("h1");
+    let value = document.createElement("h2");
+    let address = document.createElement("h2");
+    let tdNames1 = document.createElement("td");
+    tdNames1.colSpan = "2";
+    let tdNames2 = document.createElement("td");
+    let tdNames3 = document.createElement("td");
+    let trNames1 = document.createElement("tr");
+    let trNames2 = document.createElement("tr");
+    let table = document.createElement("table");
+
+    memory.innerHTML = "Memory";
+    address.innerHTML = "Address";
+    value.innerHTML = "Value";
+    tdNames1.appendChild(memory);
+    tdNames2.appendChild(address);
+    tdNames3.appendChild(value);
+    trNames1.appendChild(tdNames1);
+    trNames2.appendChild(tdNames2);
+    trNames2.appendChild(tdNames3);
+    table.appendChild(trNames1);
+    table.appendChild(trNames2);
+
+    for(let i = 1; i <= 10; i++) {
+        let h3Address = document.createElement("h3");
+        let h3Value = document.createElement("h3");
+        let tdAddress = document.createElement("td");
+        let tdValue = document.createElement("td");
+        let tr = document.createElement("tr");
+
+        h3Address.innerHTML = i;
+        h3Value.innerHTML = "?";
+        tdAddress.appendChild(h3Address);
+        tdValue.appendChild(h3Value);
+        tr.appendChild(tdAddress);
+        tr.appendChild(tdValue);
+        table.appendChild(tr);
+    }
+    memoryInners.appendChild(table);
+    let arrowUp = document.createElement("h3");
+    let showAddress = document.createElement("h3");
+    let arrowDown = document.createElement("h3");
+    tdArrowUp = document.createElement("td");
+    tdArrowUp.className = "width10";
+    tdShowAddress = document.createElement("td");
+    tdShowAddress.className = "width33";
+    tdArrowDown = document.createElement("td");
+    tdArrowDown.className = "width10";
+    trShowAddress = document.createElement("tr");
+    table2 = document.createElement("table");
+
+    arrowUp.innerHTML = "&#8593;";
+    showAddress.innerHTML = "Show Address...";
+    arrowDown.innerHTML = "&#8595;";
+
+    tdArrowUp.appendChild(arrowUp);
+    tdShowAddress.appendChild(showAddress);
+    tdArrowDown.appendChild(arrowDown);
+
+    trShowAddress.appendChild(tdArrowUp);
+    trShowAddress.appendChild(tdShowAddress);
+    trShowAddress.appendChild(tdArrowDown);
+
+    table2.appendChild(trShowAddress);
+    memoryInners.appendChild(table2);
 }
