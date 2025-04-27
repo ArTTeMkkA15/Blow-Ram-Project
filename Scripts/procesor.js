@@ -3,7 +3,7 @@ const STOP_BUTTON = document.getElementById("stopButton");
 const PAUSE_BUTTON = document.getElementById("pauseButton");
 
 class Instruction {
-    constructor(line, label, instruction, argument, comment){
+    constructor(line, label, instruction, argument){
         this.line = line;
         this.label = label;
         this.instruction = instruction;
