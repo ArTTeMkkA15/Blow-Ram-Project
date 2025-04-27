@@ -28,3 +28,10 @@
     padding: 12px;
     background-color: rgb(192, 215, 218);
 }
+
+.addButton {
+    height: 30px;
+    width: 30px;
+    left: 100%;
+    background-color: white;
+}

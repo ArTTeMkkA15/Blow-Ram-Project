@@ -1,3 +1,6 @@
+const SAVE_BUTTON = document.getElementById("saveButton");
+const USE_FILE = document.getElementById("useFile");
+
 function save() {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent("Test"));

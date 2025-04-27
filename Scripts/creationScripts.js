@@ -1,3 +1,7 @@
+let instructionsAmount = 1;
+const HEADERS = ["LN", "Label", "Instruction", "Argument", "Comment"];
+const INSTRUCTIONS = [" ", "LOAD", "STORE", "ADD", "SUB", "MULT", "DIV", "READ", "WRITE", "JUMP", "JGTZ", "JZERO", "HALT"];
+
 function createOutputCells() {
     let cells = document.querySelector(".outputCells");
     for(let i = 1; i <= 99; i++) {
@@ -55,6 +59,7 @@ function createInputCells() {
 }
 
 function createEditorProgram() {
+    console.log(instructionsAmount);
     let programDiv = document.querySelector(".program");
     
     let table = document.createElement("table");
@@ -63,11 +68,8 @@ function createEditorProgram() {
 
     let thead = document.createElement("thead");
     let headerRow = document.createElement("tr");
-    let headers = ["LN", "Label", "Instruction", "Argument", "Comment"];
-    let instruction = [" ", "LOAD", "STORE", "ADD", "SUB", "MULT", "DIV", "READ", 
-        "WRITE", "JUMP", "JGTZ", "JZERO", "HALT"];
     
-    headers.forEach(headerText => {
+    HEADERS.forEach(headerText => {
         let th = document.createElement("th");
         th.innerText = headerText;
         headerRow.appendChild(th);
@@ -78,21 +80,21 @@ function createEditorProgram() {
 
     let tbody = document.createElement("tbody");
     
-    for (let i = 1; i <= 15; i++) {
+    for (let i = 1; i <= instructionsAmount; i++) {
         let row = document.createElement("tr");
         
         let lnCell = document.createElement("td");
-        lnCell.innerText = i; 
+        lnCell.innerText = instructionsAmount; 
         row.appendChild(lnCell);
         
         let labelCell = document.createElement("td");
-        labelCell.id = `label${i}`;
+        labelCell.id = `label${instructionsAmount}`;
         labelCell.contentEditable = "true";
         row.appendChild(labelCell);
 
         let selectInst = document.createElement("select");
-        selectInst.id = `instruction${i}`;
-        instruction.forEach(instruction => {
+        selectInst.id = `instruction${instructionsAmount}`;
+        INSTRUCTIONS.forEach(instruction => {
             let optionInst = document.createElement("option");
             optionInst.innerHTML = instruction;
             selectInst.appendChild(optionInst);
@@ -100,7 +102,7 @@ function createEditorProgram() {
         row.appendChild(selectInst);
 
         let argumentCell = document.createElement("td");
-        argumentCell.id = `argument${i}`;
+        argumentCell.id = `argument${instructionsAmount}`;
         argumentCell.contentEditable = "true";
         row.appendChild(argumentCell);
 
@@ -112,6 +114,46 @@ function createEditorProgram() {
     }
     
     table.appendChild(tbody);
+
+    let addRowButton = document.createElement("button");
+    addRowButton.className = "addButton";
+    addRowButton.innerHTML = "+";
+    programDiv.appendChild(addRowButton);
+
+    addRowButton.addEventListener("click", function(){
+        instructionsAmount++;
+    
+        let row = document.createElement("tr");
+            
+        let lnCell = document.createElement("td");
+        lnCell.innerText = instructionsAmount; 
+        row.appendChild(lnCell);
+        
+        let labelCell = document.createElement("td");
+        labelCell.id = `label${instructionsAmount}`;
+        labelCell.contentEditable = "true";
+        row.appendChild(labelCell);
+    
+        let selectInst = document.createElement("select");
+        selectInst.id = `instruction${instructionsAmount}`;
+        INSTRUCTIONS.forEach(instruction => {
+            let optionInst = document.createElement("option");
+            optionInst.innerHTML = instruction;
+            selectInst.appendChild(optionInst);
+        });
+        row.appendChild(selectInst);
+    
+        let argumentCell = document.createElement("td");
+        argumentCell.id = `argument${instructionsAmount}`;
+        argumentCell.contentEditable = "true";
+        row.appendChild(argumentCell);
+    
+        let commentCell = document.createElement("td");
+        commentCell.contentEditable = "true";
+        row.appendChild(commentCell);
+        
+        tbody.appendChild(row);
+    });
 }
 
 let focused = 3;
