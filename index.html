@@ -6,43 +6,167 @@
     <link rel="stylesheet" href="Styles/style.css">
     <link rel="stylesheet" href="Styles/edytor.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" href="Styles/sunshine.png">
+
     <title>RAM Machine</title>
 </head>
-<body onload="createOutputCells(), createInputCells(), createEditorProgram()">
-    <div class="topBar">
-        <h2>RAM Machine - Daniel Syska, Artemiusz Kulikouski, Szymon Rosa</h2>
-        <ol class="barOptions">
-            <li class="option save" onclick="save()"><i class="fa fa-save"></i></li>
-            <li class="option open"><input onchange="useFile()" type="file" class="file_upload" style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%; cursor:pointer;"/><i class="fa fa-file-o"></i></li>
-            <li class="option run" onclick="start()">&#11208;</li>
-            <li class="option stop">&#9632;</li>
-            <li class="option step"><i class="fa fa-fast-forward"></i></li>
-            <li class="option kill">&#9679;</li>
-        </ol>
+<body onload="createOutputCells(), createInputCells(), createEditorProgram(), readMemory()">
+    <div id="sunshine"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function checkImage(src, callback) {
+                const img = new Image();
+                img.onload = function() { callback(true); };
+                img.onerror = function() { callback(false); };
+                img.src = src;
+            }
+
+            checkImage('./Styles/sunshine.png', function(exists) {
+                if (exists) {
+                    const sunshine = document.getElementById('checkForMySunshine');
+                    const rainy = document.getElementById('rainy'); 
+                    if (sunshine) {
+                        sunshine.style.display = "block";
+                        rainy.style.display = "none";
+                    } else {
+                        console.log("Element with ID 'checkForMySunshine' not found.");
+                    }
+                }
+            });
+        });
+    </script>
+    <div id="checkForMySunshine">
+        <div class="topBar">
+            <h2>RAM Machine - Daniel Syska, Artemiusz Kulikouski, Szymon Rosa</h2>
+            <ol class="barOptions">
+                <li class="option save"><i class="fa fa-save"></i></li>
+                <li class="option open"><i class="fa fa-file-o"></i></li>
+                <li class="option run">&#11208;</li>
+                <li class="option stop">&#9632;</li>
+                <li class="option step"><i class="fa fa-fast-forward"></i></li>
+                <li class="option kill">&#9679;</li>
+            </ol>
+        </div>
+        <main>
+            <div class="sideBar">
+                <div class="processor">
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <h1>Procesor</h1>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2>Instruction</h2>
+                            </td>
+                            <td>
+                                <input type="text" class="width50" id="instruction" disabled value="
+                                Baby, you don't how to hide when you off the drank (mhm, I)
+                                1738, baby, I see your eyes watching me, ayy (watchin' me, ayy)
+                                Call me when it get late, ooh
+                                I'll be on the way
+                                I know you're fiendin' for your bae
+                                I like when I ride it, I ride it, I ride it
+                                Yeah, when I ride it, I ride it
+                                Yeah, when I ride it, yeah, when I ride it
+                                Yeah, you like when I ride it, I ride it, I ride it
+                                Yeah, when I ride it (yeah), I ride it
+                                Yeah, when I ride it, yeah, when I ride it (Zoovie)
+                                Love when you do your thing
+                                Girl, I love when I make you scream, bae (ooh)
+                                You know what I mean, girl, I love when I'm in between, baby (yeah)
+                                I'ma let it break down, ooh, I'ma make you proud, baby
+                                Ooh, you gon' stay around, baby (ooh)
+                                Ooh, I'ma make you smile, baby (yeah)
+                                Welcome to the light show
+                                Ooh, girl, you shine so bright, baby (yeah)
+                                I'm on the top hittin' right, baby (ooh)
+                                Make me spend the night, baby (yeah)
+                                Ayy, 1738 (gang)
+                                Look at this drink, it's straight, and
+                                Even got Jersey plates, yeah
+                                Girl, I love when you come my way
+                                Got something to say, uh, I want you to stay, yeah
+                                Huh, I love when you ride, ooh
+                                I love when you spin around and keep that dick inside, ooh, ooh
+                                Hm, lookin' in your eyes, and you look back at mine
+                                I'm with you, let's keep this vibe, yeah
+                                Baby, you don't how to hide when you off the drank (when I'm off the drank)
+                                1738 (ooh), baby, I see your eyes watching me, ayy
+                                Call me when it get late, ooh
+                                I'll be on the way (ooh)
+                                I know you're fiendin' for your bae
+                                I like when I ride it, I ride it, I ride it
+                                Yeah, when I ride it, I ride it
+                                Yeah, when I ride it, Yeah, when I ride it
+                                Yeah, you like when I ride it, I ride it (mhm), I ride it
+                                Yeah, when I ride it (I do), I ride it (I do)
+                                Yeah, when I ride it, yeah, when I ride it
+                                Ayy, girl, what's up with you? I got more for you
+                                I got more to prove to you, baby
+                                I can never see me leavin' you, if I do, I must be crazy
+                                Ayy, let me get it first in the showers
+                                Mhm, let it air dry, no towels, ooh
+                                Hm, babygirl, let me lick you up
+                                I'ma need me an hour, ooh
+                                Might send you a box 'bout two, three pounds, I'ma send you flowers
+                                Mhm, got you a nigga with stripes, mhm, nigga with power
+                                I like when you ride it, baby, how you so excited
+                                I know how you like it, baby, please don't try to fight it
+                                Make you scream out, it sound like, Ooh, baby when I'm in it
+                                You know I'ma act a fool, baby, when I'm in it
+                                And that shit be like a pool, baby, I be swimmin'
+                                Baby, you know how I do, baby, it's the Zoo, baby (yeah)
+                                Baby, you don't how to hide when you off the drank (mhm, baby)
+                                1738, baby, I see your eyes watching me, ayy
+                                Call me when it get late, ooh
+                                I'll be on the way
+                                I know you're fiendin' for your bae
+                                I like when I ride it (I do), I ride it, I ride it (I do)
+                                Yeah, when I ride it (ooh-ooh), I ride it
+                                Yeah, when I ride it (all day), yeah, when I ride it
+                                Yeah, you like when I ride it (I do), I ride it (I do), I ride it (I do)
+                                Yeah, when I ride it (I do), I ride it, yeah, when I ride it
+                                Yeah, when I ride it (ooh, woah) (yeah)
+                                ">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h2>Argument</h2>
+                            </td>
+                            <td>
+                                <input type="text" class="width50" id="argument" disabled value="type shi">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                    <div class="memory"></div>
+            </div>
+            <div class="mainPanel">
+                <div class="inputArea">
+                    <div class="maxLeft" onclick="maxLeft('i')">&#8676;</div>
+                    <div class="leftArrow" onclick="arrowLeft('i')">&#129092;</div>
+                    <div class="inputCells"></div>
+                    <div class="rightArrow" onclick="arrowRight('i')">&#129094;</div>
+                </div>
+                <div class="program">
+                </div>
+                <div class="outputArea">
+                    <div class="maxLeft" onclick="maxLeft('o')">&#8676;</div>
+                    <div class="leftArrow" onclick="arrowLeft('o')">&#129092;</div>
+                    <div class="outputCells"></div>
+                    <div class="rightArrow" onclick="arrowRight('o')">&#129094;</div>
+                </div>
+            </div>
+        </main>
+        <script src="Scripts/creationScripts.js"></script>
+        <script src="Scripts/procesor.js"></script>
     </div>
-    <main>
-        <div class="sideBar">
-            Procesor i Memory
-        </div>
-        <div class="mainPanel">
-            <div class="inputArea">
-                <div class="maxLeft" onclick="maxLeft('inputCells')">&#8676;</div>
-                <div class="leftArrow" onclick="arrowLeft('inputCells')">&#129092;</div>
-                <div id="inputCells"></div>
-                <div class="rightArrow" onclick="arrowRight('inputCells')">&#129094;</div>
-            </div>
-            <div class="program">
-            </div>
-            <div class="outputArea">
-                <div class="maxLeft" onclick="maxLeft('outputCells')">&#8676;</div>
-                <div class="leftArrow" onclick="arrowLeft('outputCells')">&#129092;</div>
-                <div id="outputCells"></div>
-                <div class="rightArrow" onclick="arrowRight('outputCells')">&#129094;</div>
-            </div>
-        </div>
-    </main>
-    <script src="Scripts/topBarScripts.js"></script>
-    <script src="Scripts/creationScripts.js"></script>
-    <script src="Scripts/procesor.js"></script>
+    <div id="rainy">
+        <h1>No sunshine in folder "Styles".</h1>
+        <h1>;_(</h1>
+    </div>
 </body>
 </html>
