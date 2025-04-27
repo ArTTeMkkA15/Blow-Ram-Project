@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>RAM Machine</title>
 </head>
-<body onload="createOutputCells(), createInputCells(), createEditorProgram()">
+<body onload="createOutputCells(), createInputCells(), createEditorProgram(), readMemory()">
     <div class="topBar">
         <h2>RAM Machine - Daniel Syska, Artemiusz Kulikouski, Szymon Rosa</h2>
         <ol class="barOptions">
@@ -22,16 +22,33 @@
     </div>
     <main>
         <div class="sideBar">
-                <div class="processor">
-                <h1>Procesor</h1>
-                <h2>Instruction</h2>
-                <input type="text" disabled value="
-                Baby, you don't how to hide when you off the drank (mhm, I)
-                ">
-                <h2>Argument</h2>
-                <input type="text" disabled value="type shi">
+            <div class="processor">
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            <h1>Procesor</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h2>Instruction</h2>
+                        </td>
+                        <td>
+                            <input type="text" class="width50" id="instruction" disabled value="Baby, ">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h2>Argument</h2>
+                        </td>
+                        <td>
+                            <input type="text" class="width50" id="argument" disabled value="type shi">
+                        </td>
+                    </tr>
+                </table>
             </div>
-                <div class="memory">
+            <div class="memory">
+                
             </div>
         </div>
         <div class="mainPanel">

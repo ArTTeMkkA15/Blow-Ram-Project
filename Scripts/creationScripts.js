@@ -186,5 +186,69 @@ function readProcessor(){
 
 function readMemory(){
     let memoryInners = document.querySelector(".memory");
-    let adres = document.createElement("h1");
+    let memory = document.createElement("h1");
+    let value = document.createElement("h2");
+    let address = document.createElement("h2");
+    let tdNames1 = document.createElement("td");
+    tdNames1.colSpan = "2";
+    let tdNames2 = document.createElement("td");
+    let tdNames3 = document.createElement("td");
+    let trNames1 = document.createElement("tr");
+    let trNames2 = document.createElement("tr");
+    let table = document.createElement("table");
+
+    memory.innerHTML = "Memory";
+    address.innerHTML = "Address";
+    value.innerHTML = "Value";
+    tdNames1.appendChild(memory);
+    tdNames2.appendChild(address);
+    tdNames3.appendChild(value);
+    trNames1.appendChild(tdNames1);
+    trNames2.appendChild(tdNames2);
+    trNames2.appendChild(tdNames3);
+    table.appendChild(trNames1);
+    table.appendChild(trNames2);
+
+    for(let i = 1; i <= 10; i++) {
+        let h3Address = document.createElement("h3");
+        let h3Value = document.createElement("h3");
+        let tdAddress = document.createElement("td");
+        let tdValue = document.createElement("td");
+        let tr = document.createElement("tr");
+
+        h3Address.innerHTML = i;
+        h3Value.innerHTML = "?";
+        tdAddress.appendChild(h3Address);
+        tdValue.appendChild(h3Value);
+        tr.appendChild(tdAddress);
+        tr.appendChild(tdValue);
+        table.appendChild(tr);
+    }
+    memoryInners.appendChild(table);
+    let arrowUp = document.createElement("h3");
+    let showAddress = document.createElement("h3");
+    let arrowDown = document.createElement("h3");
+    tdArrowUp = document.createElement("td");
+    tdArrowUp.className = "width10";
+    tdShowAddress = document.createElement("td");
+    tdShowAddress.className = "width33";
+    tdArrowDown = document.createElement("td");
+    tdArrowDown.className = "width10";
+    trShowAddress = document.createElement("tr");
+    table2 = document.createElement("table");
+
+    arrowUp.innerHTML = "&#8593;";
+    showAddress.innerHTML = "Show Address...";
+    arrowDown.innerHTML = "&#8595;";
+
+    tdArrowUp.appendChild(arrowUp);
+    tdShowAddress.appendChild(showAddress);
+    tdArrowDown.appendChild(arrowDown);
+
+    trShowAddress.appendChild(tdArrowUp);
+    trShowAddress.appendChild(tdShowAddress);
+    trShowAddress.appendChild(tdArrowDown);
+
+    table2.appendChild(trShowAddress);
+    memoryInners.appendChild(table2);
 }
