@@ -68,6 +68,9 @@ function createEditorProgram() {
 
     let thead = document.createElement("thead");
     let headerRow = document.createElement("tr");
+    let headers = ["LN", "Label", "Instruction", "Argument", "Comment"];
+    let instruction = [" ", "LOAD", "STORE", "ADD", "SUB", "MULT", "DIV", "READ", 
+        "WRITE", "JUMP", "JGTZ", "JZERO", "HALT"];
     
     HEADERS.forEach(headerText => {
         let th = document.createElement("th");
@@ -80,7 +83,8 @@ function createEditorProgram() {
 
     let tbody = document.createElement("tbody");
     
-    for (let i = 1; i <= instructionsAmount; i++) {
+
+    for (let i = 1; i <= 15; i++) {
         let row = document.createElement("tr");
         
         let lnCell = document.createElement("td");
@@ -93,8 +97,8 @@ function createEditorProgram() {
         row.appendChild(labelCell);
 
         let selectInst = document.createElement("select");
-        selectInst.id = `instruction${instructionsAmount}`;
-        INSTRUCTIONS.forEach(instruction => {
+        selectInst.id = `instruction${i}`;
+        instruction.forEach(instruction => {
             let optionInst = document.createElement("option");
             optionInst.innerHTML = instruction;
             selectInst.appendChild(optionInst);
