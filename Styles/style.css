@@ -68,18 +68,6 @@ body {
     font-size: 35px;
 }
 
-#sunshine{
-    display: none;
-}
-
-#checkForMySunshine{
-    display: none;
-}
-
-#rainy{
-    display: block;
-}
-
 main {
     display: flex;
     background: lightpink;
