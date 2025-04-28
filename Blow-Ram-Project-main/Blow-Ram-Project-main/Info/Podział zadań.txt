@@ -1,3 +1,0 @@
-Szymon - Procesor, Memory
-Artemiusz - Taśma wyjściowa, Edytor Programu
-Daniel - Taśma wejściowa, Górny pasek z funkcjami programu (Rozpoczęcie programu, Operacje na plikach, itd), animacje
