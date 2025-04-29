@@ -39,6 +39,7 @@ body {
 .option {
     font-size: 25px;
     border: 1px rgb(165, 164, 164) solid;
+    background-color: rgb(216, 218, 223);
     border-radius: 5px;
     font-size: 25px;
     display: flex;
@@ -116,7 +117,7 @@ main {
     overflow-x: hidden;
 }
 
-.inputCells, .outputCells {
+#inputCells, #outputCells {
     display: flex;
     flex-direction: row;
     overflow-x: hidden;

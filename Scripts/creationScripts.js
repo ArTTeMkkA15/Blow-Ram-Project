@@ -3,7 +3,7 @@ const HEADERS = ["LN", "Label", "Instruction", "Argument", "Comment"];
 const INSTRUCTIONS = [" ", "LOAD", "STORE", "ADD", "SUB", "MULT", "DIV", "READ", "WRITE", "JUMP", "JGTZ", "JZERO", "HALT"];
 
 function createOutputCells() {
-    let cells = document.querySelector(".outputCells");
+    let cells = document.querySelector("#outputCells");
     for(let i = 1; i <= 99; i++) {
         let cell = document.createElement("div");
         cell.className = "cell";
@@ -31,7 +31,7 @@ function createOutputCells() {
 }
 
 function createInputCells() {
-    let cells = document.querySelector(".inputCells");
+    let cells = document.querySelector("#inputCells");
     for(let i = 1; i <= 99; i++) {
         let cell = document.createElement("div");
         cell.className = "cell";
@@ -160,28 +160,31 @@ function createEditorProgram() {
     });
 }
 
-let focused = 3;
-
 function maxLeft(e) {
-    focused = 1;
-    focusedCell = document.getElementById(e + focused);
-    focusedCell.scrollIntoView();
+    focusedCell = document.getElementById(e);
+    focusedCell.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+    });
 }
 
 function arrowLeft(e) {
-    focused-= 3;
-    if(focused <= 0) 
-        focused = 1;
-    focusedCell = document.getElementById(e + focused);
-    focusedCell.scrollIntoView();
-    focused++;
+    focusedCell = document.getElementById(e);
+    focusedCell.scrollBy({
+        top: 0,
+        left: -250,
+        behavior: "smooth",
+    });
 }
 
 function arrowRight(e) {
-    focused+= 3;
-    focusedCell = document.getElementById(e + focused);
-    focusedCell.scrollIntoView();
-    focused--;
+    focusedCell = document.getElementById(e);
+    focusedCell.scrollBy({
+        top: 0,
+        left: 250,
+        behavior: "smooth",
+    });
 }
 
 function readProcessor(){
