@@ -47,7 +47,6 @@ function createInputCells() {
         header.className = "header";
         headerCell.className = "headerCell";
         input.type = "number";
-        input.disabled = "disabled";
         header.innerHTML = i;
 
         headerCell.appendChild(header);
@@ -68,9 +67,6 @@ function createEditorProgram() {
 
     let thead = document.createElement("thead");
     let headerRow = document.createElement("tr");
-    let headers = ["LN", "Label", "Instruction", "Argument", "Comment"];
-    let instruction = [" ", "LOAD", "STORE", "ADD", "SUB", "MULT", "DIV", "READ", 
-        "WRITE", "JUMP", "JGTZ", "JZERO", "HALT"];
     
     HEADERS.forEach(headerText => {
         let th = document.createElement("th");
@@ -79,43 +75,41 @@ function createEditorProgram() {
     });
     
     thead.appendChild(headerRow);
+
     table.appendChild(thead);
 
     let tbody = document.createElement("tbody");
+
+    let row = document.createElement("tr");
+        
+    let lnCell = document.createElement("td");
+    lnCell.innerText = instructionsAmount; 
+    row.appendChild(lnCell);
+        
+    let labelCell = document.createElement("td");
+    labelCell.id = `label${instructionsAmount}`;
+    labelCell.contentEditable = "true";
+    row.appendChild(labelCell);
     
+    let selectInst = document.createElement("select");
+    selectInst.id = `instruction${instructionsAmount}`;
+    INSTRUCTIONS.forEach(instruction => {
+        let optionInst = document.createElement("option");
+        optionInst.innerHTML = instruction;
+        selectInst.appendChild(optionInst);
+    });
+    row.appendChild(selectInst);
 
-    for (let i = 1; i <= 15; i++) {
-        let row = document.createElement("tr");
-        
-        let lnCell = document.createElement("td");
-        lnCell.innerText = instructionsAmount; 
-        row.appendChild(lnCell);
-        
-        let labelCell = document.createElement("td");
-        labelCell.id = `label${instructionsAmount}`;
-        labelCell.contentEditable = "true";
-        row.appendChild(labelCell);
+    let argumentCell = document.createElement("td");
+    argumentCell.id = `argument${instructionsAmount}`;
+    argumentCell.contentEditable = "true";
+    row.appendChild(argumentCell);
 
-        let selectInst = document.createElement("select");
-        selectInst.id = `instruction${i}`;
-        instruction.forEach(instruction => {
-            let optionInst = document.createElement("option");
-            optionInst.innerHTML = instruction;
-            selectInst.appendChild(optionInst);
-        });
-        row.appendChild(selectInst);
-
-        let argumentCell = document.createElement("td");
-        argumentCell.id = `argument${instructionsAmount}`;
-        argumentCell.contentEditable = "true";
-        row.appendChild(argumentCell);
-
-        let commentCell = document.createElement("td");
-        commentCell.contentEditable = "true";
-        row.appendChild(commentCell);
-        
-        tbody.appendChild(row);
-    }
+    let commentCell = document.createElement("td");
+    commentCell.contentEditable = "true";
+    row.appendChild(commentCell);
+    
+    tbody.appendChild(row);
     
     table.appendChild(tbody);
 
