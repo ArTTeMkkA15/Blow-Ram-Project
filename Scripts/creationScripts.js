@@ -1,4 +1,5 @@
 let instructionsAmount = 1;
+let currentNum = 1;
 const HEADERS = ["LN", "Label", "Instruction", "Argument", "Comment"];
 const INSTRUCTIONS = [" ", "LOAD", "STORE", "ADD", "SUB", "MULT", "DIV", "READ", "WRITE", "JUMP", "JGTZ", "JZERO", "HALT"];
 
@@ -47,6 +48,7 @@ function createInputCells() {
         header.className = "header";
         headerCell.className = "headerCell";
         input.type = "number";
+        input.id = 'input'+i;
         header.innerHTML = i;
 
         headerCell.appendChild(header);
@@ -120,7 +122,7 @@ function createEditorProgram() {
 
     addRowButton.addEventListener("click", function(){
         instructionsAmount++;
-    
+        console.log(instructionsAmount);
         let row = document.createElement("tr");
             
         let lnCell = document.createElement("td");
@@ -210,7 +212,7 @@ function readMemory(){
     table.appendChild(trNames1);
     table.appendChild(trNames2);
 
-    for(let i = 1; i <= 10; i++) {
+    for(let i = 0; i <= 10; i++) {
         let h3Address = document.createElement("h3");
         let h3Value = document.createElement("h3");
         let tdAddress = document.createElement("td");
@@ -219,6 +221,7 @@ function readMemory(){
 
         h3Address.innerHTML = i;
         h3Value.innerHTML = "?";
+        h3Value.id = "value"+i;
         tdAddress.appendChild(h3Address);
         tdValue.appendChild(h3Value);
         tr.appendChild(tdAddress);
@@ -226,9 +229,9 @@ function readMemory(){
         table.appendChild(tr);
     }
     memoryInners.appendChild(table);
-    let arrowUp = document.createElement("h3");
-    let showAddress = document.createElement("h3");
-    let arrowDown = document.createElement("h3");
+    let arrowUp = document.createElement("button");
+    let showAddress = document.createElement("button");
+    let arrowDown = document.createElement("button");
     tdArrowUp = document.createElement("td");
     tdArrowUp.className = "width10";
     tdShowAddress = document.createElement("td");
@@ -252,4 +255,25 @@ function readMemory(){
 
     table2.appendChild(trShowAddress);
     memoryInners.appendChild(table2);
+}
+
+function startButton(){
+    while(currentNum <= instructionsAmount){
+        let instructionRead = document.getElementById('instruction'+currentNum).value;
+        let argumentRead = document.getElementById('argument'+currentNum).textContent;
+        console.log(instructionRead);
+        console.log(argumentRead);
+        let instructionInsert = document.getElementById('instruction');
+        let argumentInsert = document.getElementById('argument');
+        instructionInsert.value = instructionRead;
+        argumentInsert.value = argumentRead;
+        
+        //Część funkcji powyżej wpisuje dane do Procesora;
+
+        let memoryValue = document.getElementById('value'+argumentRead);
+        console.log(memoryValue);
+        memoryValue.textContent = document.getElementById('input'+currentNum).value;
+        currentNum++;
+        //Część funkcji która wpisuje do memory;
+    }
 }
