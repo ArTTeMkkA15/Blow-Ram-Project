@@ -1,13 +1,4 @@
 let instructionsAmount = 1;
-let currentNum = 1;
-let currentNumUpperIndex = 1;
-let currentNumJump = 1;
-let currentNumJgtz = 1;
-let output = 1;
-let jump = 0;
-let jgtz = 0;
-let jumpX = '';
-let jgtzX = '';
 const HEADERS = ["LN", "Label", "Instruction", "Argument", "Comment"];
 const INSTRUCTIONS = [" ", "LOAD", "STORE", "ADD", "SUB", "MULT", "DIV", "READ", "WRITE", "JUMP", "JGTZ", "JZERO", "HALT"];
 
@@ -15,7 +6,7 @@ function createOutputCells() {
     let cells = document.querySelector("#outputCells");
     for(let i = 1; i <= 99; i++) {
         let cell = document.createElement("div");
-        cell.className = "cellO";
+        cell.className = "cell";
         cell.id = "o"+i;
 
         let input = document.createElement("input");
@@ -29,7 +20,7 @@ function createOutputCells() {
         headerCell.className = "headerCell";
         input.type = "number";
         input.id = 'output'+i;
-        //input.disabled = "disabled";
+        input.disabled = "disabled";
         header.innerHTML = i;
 
         headerCell.appendChild(header);
@@ -44,7 +35,7 @@ function createInputCells() {
     let cells = document.querySelector("#inputCells");
     for(let i = 1; i <= 99; i++) {
         let cell = document.createElement("div");
-        cell.className = "cellI";
+        cell.className = "cell";
         cell.id = "i"+i;
 
         let input = document.createElement("input");
@@ -111,6 +102,7 @@ function createEditorProgram() {
         selectInst.appendChild(optionInst);
     });
     row.appendChild(selectInst);
+    
 
     let argumentCell = document.createElement("td");
     argumentCell.id = `argument${instructionsAmount}`;
@@ -118,8 +110,8 @@ function createEditorProgram() {
     row.appendChild(argumentCell);
 
     let commentCell = document.createElement("td");
-    commentCell.contentEditable = "true";
     commentCell.id = `comment${instructionsAmount}`;
+    commentCell.contentEditable = "true";
     row.appendChild(commentCell);
     
     tbody.appendChild(row);
@@ -130,6 +122,7 @@ function createEditorProgram() {
     addRowButton.className = "addButton";
     addRowButton.innerHTML = "+";
     programDiv.appendChild(addRowButton);
+
 
     addRowButton.addEventListener("click", function(){
         instructionsAmount++;
@@ -194,10 +187,6 @@ function arrowRight(e) {
         left: 250,
         behavior: "smooth",
     });
-}
-
-function readProcessor(){
-
 }
 
 function readMemory(){
