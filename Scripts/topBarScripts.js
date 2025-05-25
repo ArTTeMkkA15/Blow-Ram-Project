@@ -24,7 +24,28 @@ START_BUTTON.addEventListener("click", function getInstructions(){
 
 function download() {
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent("text"));
+
+    let inputSave = "";
+    let inputs = document.getElementsByClassName("cellI");
+    for(let i = 0; i < inputs.length; i++) {
+      let value = inputs[i].querySelector(".inputCell").querySelector(".input").value;
+      if(value != "") {
+        inputSave += value + ";";
+      }
+    }
+
+
+    let programSave = "";
+    let rows = document.querySelectorAll(".row");
+    for(let i = 0; i<rows.length; i++) {
+      let label = rows[i].querySelector("#label" + (i+1)).innerText;
+      let instr = rows[i].querySelector("#instruction" + (i+1)).selectedIndex;
+      let arg = rows[i].querySelector("#argument" + (i+1)).innerText;
+      let comm = rows[i].querySelector("#comment" + (i+1)).innerText;
+      programSave += label + ";" + instr + ";" + arg + ";" + comm + "\n";
+    }
+    
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(inputSave + "\n" + programSave));
     element.setAttribute('download', "test");
   
     element.style.display = 'none';
@@ -33,17 +54,4 @@ function download() {
     element.click();
   
     document.body.removeChild(element);
-}
-
-function getFile() {
-  const input = document.getElementById('fileUpload');
-  let file = input.files[0];
-  let fr = new FileReader();
-  fr.readAsText(file);
-  fr.onload = () => {
-    alert(fr.result);
-  }
-  fr.onerror = () => {
-    alert(fr.error);
-  }
 }
