@@ -1,5 +1,13 @@
 let instructionsAmount = 1;
 let currentNum = 1;
+let currentNumUpperIndex = 1;
+let currentNumJump = 1;
+let currentNumJgtz = 1;
+let output = 1;
+let jump = 0;
+let jgtz = 0;
+let jumpX = '';
+let jgtzX = '';
 const HEADERS = ["LN", "Label", "Instruction", "Argument", "Comment"];
 const INSTRUCTIONS = [" ", "LOAD", "STORE", "ADD", "SUB", "MULT", "DIV", "READ", "WRITE", "JUMP", "JGTZ", "JZERO", "HALT"];
 
@@ -20,7 +28,8 @@ function createOutputCells() {
         header.className = "header";
         headerCell.className = "headerCell";
         input.type = "number";
-        input.disabled = "disabled";
+        input.id = 'output'+i;
+        //input.disabled = "disabled";
         header.innerHTML = i;
 
         headerCell.appendChild(header);
@@ -49,6 +58,7 @@ function createInputCells() {
         headerCell.className = "headerCell";
         input.type = "number";
         input.id = 'input'+i;
+        input.value = i;
         header.innerHTML = i;
 
         headerCell.appendChild(header);
@@ -212,7 +222,7 @@ function readMemory(){
     table.appendChild(trNames1);
     table.appendChild(trNames2);
 
-    for(let i = 0; i <= 10; i++) {
+    for(let i = 0; i <= 99; i++) {
         let h3Address = document.createElement("h3");
         let h3Value = document.createElement("h3");
         let tdAddress = document.createElement("td");
@@ -259,21 +269,114 @@ function readMemory(){
 
 function startButton(){
     while(currentNum <= instructionsAmount){
+        console.log(currentNum);
         let instructionRead = document.getElementById('instruction'+currentNum).value;
         let argumentRead = document.getElementById('argument'+currentNum).textContent;
-        console.log(instructionRead);
-        console.log(argumentRead);
         let instructionInsert = document.getElementById('instruction');
         let argumentInsert = document.getElementById('argument');
+        console.log("instructionRead:"+instructionRead);
+        console.log("argumentRead:"+argumentRead);
+        let memoryValue = document.getElementById('value'+argumentRead);
         instructionInsert.value = instructionRead;
         argumentInsert.value = argumentRead;
-        
         //Część funkcji powyżej wpisuje dane do Procesora;
-
-        let memoryValue = document.getElementById('value'+argumentRead);
-        console.log(memoryValue);
-        memoryValue.textContent = document.getElementById('input'+currentNum).value;
+        if(jump === 0){
+            if(jgtz === 0){
+                console.log(jump);
+                switch (instructionRead) {
+                    case "LOAD":
+                        var value0 = document.getElementById('value0');
+                        value0.textContent = document.getElementById('value'+argumentRead).textContent;
+                        break;
+                    case "STORE":
+                        var valueX = document.getElementById('value'+argumentRead);
+                        valueX.textContent = document.getElementById('value0').textContent;
+                        break;
+                    case "ADD":
+                        var value0 = document.getElementById('value0');
+                        var valueX = document.getElementById('value'+argumentRead);
+                        valueADD = parseInt(value0.textContent) + parseInt(valueX.textContent);
+                        value0.textContent = valueADD;
+                        console.log(valueADD);
+                        value0.innerHTML;
+                        break;
+                    case "SUB":
+                        var value0 = document.getElementById('value0');
+                        var valueX = document.getElementById('value'+argumentRead);
+                        valueADD = parseInt(value0.textContent) - parseInt(valueX.textContent);
+                        value0.textContent = valueADD;
+                        console.log(valueADD);
+                        value0.innerHTML;
+                        break;
+                    case "MULT":
+                        var value0 = document.getElementById('value0');
+                        var valueX = document.getElementById('value'+argumentRead);
+                        valueADD = parseInt(value0.textContent) * parseInt(valueX.textContent);
+                        value0.textContent = valueADD;
+                        console.log(valueADD);
+                        value0.innerHTML;
+                        break;
+                    case "DIV":
+                        var value0 = document.getElementById('value0');
+                        var valueX = document.getElementById('value'+argumentRead);
+                        valueADD = Math.floor(parseInt(value0.textContent) / parseInt(valueX.textContent));
+                        value0.textContent = valueADD;
+                        console.log(valueADD);
+                        value0.innerHTML;
+                        break;
+                    case "READ":
+                        memoryValue.textContent = document.getElementById('input'+currentNum).value;
+                        break;
+                    case "WRITE":
+                        var valueX = document.getElementById('value'+argumentRead).textContent;
+                        var outputX = document.getElementById('output'+output);
+                        outputX.value = valueX;
+                        output++;
+                        console.log(output);
+                        break;
+                    case "JUMP":
+                        jumpX = document.getElementById('label'+currentNum).textContent;
+                        console.log(jumpX);
+                        jump = 1;
+                        break;
+                    case "JGTZ":
+                        jgtzX = document.getElementById('label'+currentNum).textContent;
+                        console.log(jumpX);
+                        jgtz = 1;
+                        break;
+                    case "JZERO":
+                        
+                        break;
+                    case "HALT":
+                        currentNum = instructionsAmount;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else{
+                while(currentNumJgtz <= instructionsAmount){
+                    var jgtzToCheck = document.getElementById('label'+currentNumJump).textContent;
+                    console.log(jgtzToCheck);
+                }
+            }
+        }
+        else{
+            while(currentNumJump <= instructionsAmount){
+                var jumpToCheck = document.getElementById('label'+currentNumJump).textContent;
+                if(jumpToCheck === jumpX){
+                    jump = 0;
+                    console.log("jump = 0");
+                    currentNum = currentNumJump;
+                    currentNum = currentNum-1;
+                    console.log("currentNumber my ass:"+currentNum);
+                    currentNumJump = instructionsAmount;
+                }
+                currentNumJump++;
+            }
+            currentNumJump = 1;
+        }
         currentNum++;
-        //Część funkcji która wpisuje do memory;
+        currentNumUpperIndex++;
     }
 }
