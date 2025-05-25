@@ -7,7 +7,9 @@ class Instruction {
     }
 }
 
+const START_BUTTON = document.getElementById("startButton");
 let instructionArray = [];
+let currentInputCell = 1;
 let currentNum = 1;
 let currentNumJump = 1;
 let currentNumUpperIndex = 0;
@@ -45,14 +47,27 @@ function setValue(argument, value) {
     }
 }
 
-function startButton() {
+START_BUTTON.addEventListener("click", function getInstructions(){
+    for (i = 1; i <= instructionsAmount; i++){
+        let rowLable = document.getElementById(`label${i}`).innerText;    
+        let OptionsInstruction = document.getElementById(`instruction${i}`);
+        let rowInstruction = OptionsInstruction.options[OptionsInstruction.selectedIndex].text;
+        let rowArgument = document.getElementById(`argument${i}`).innerText;
+
+        if (rowLable == "" || rowArgument == "" || rowInstruction == ""){
+            //alert("Fields: Lable, Instruciton and Argument cannot be empty!");
+            break;
+        } 
+        else {
+            const Code = new Instruction(i, rowLable, rowInstruction, rowArgument);
+            instructionArray[i] = Code;
+        }
+    }
+    console.log(instructionArray);
     while (currentNum <= instructionsAmount) {
         let instructionRead = document.getElementById('instruction' + currentNum).value;
         let argumentRead = document.getElementById('argument' + currentNum).textContent.trim();
         let labelRead = document.getElementById('label' + currentNum).textContent.trim();
-
-        let currentInstruction = new Instruction(currentNum, labelRead, instructionRead, argumentRead);
-        instructionArray.push(currentInstruction);
 
         let instructionInsert = document.getElementById('instruction');
         let argumentInsert = document.getElementById('argument');
@@ -82,8 +97,9 @@ function startButton() {
                         setValue("0", Math.floor(getValue("0") / getValue(argumentRead)));
                         break;
                     case "READ":
-                        let inputValue = document.getElementById('input' + currentNum);
+                        let inputValue = document.getElementById('input' + currentInputCell);
                         if (inputValue) setValue(argumentRead, inputValue.value);
+                        currentInputCell++;
                         break;
                     case "WRITE":
                         let outputValue = getValue(argumentRead);
@@ -131,4 +147,4 @@ function startButton() {
         currentNum++;
         currentNumUpperIndex++;
     }
-}
+});
