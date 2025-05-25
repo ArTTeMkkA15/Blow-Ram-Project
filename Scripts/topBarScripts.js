@@ -12,7 +12,7 @@ START_BUTTON.addEventListener("click", function getInstructions(){
         let rowArgument = document.getElementById(`argument${i}`).innerText;
 
         if (rowLable == "" || rowArgument == "" || rowInstruction == ""){
-            alert("Fields: Lable, Instruciton and Argument cannot be empty!");
+            //alert("Fields: Lable, Instruciton and Argument cannot be empty!");
             break;
         } 
         else {
