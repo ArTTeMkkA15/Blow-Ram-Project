@@ -16,12 +16,13 @@ function createOutputCells() {
 
         let header = document.createElement("h3");
         let headerCell = document.createElement("div");
-        header.className = "header";
+        header.className = "headerO";
         headerCell.className = "headerCell";
         input.type = "number";
         input.id = 'output'+i;
         input.disabled = "disabled";
         header.innerHTML = i;
+        if(i == 1) header.classList.add("glowica");
 
         headerCell.appendChild(header);
         inputCell.appendChild(input);
@@ -45,11 +46,12 @@ function createInputCells() {
 
         let header = document.createElement("h3");
         let headerCell = document.createElement("div");
-        header.className = "header";
+        header.className = "headerI";
         headerCell.className = "headerCell";
         input.type = "number";
         input.id = 'input'+i;
         header.innerHTML = i;
+        if(i == 1) header.classList.add("glowica");
 
         headerCell.appendChild(header);
         inputCell.appendChild(input);

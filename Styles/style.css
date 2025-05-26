@@ -159,7 +159,7 @@ main {
     justify-content: center;
     align-items: center;
 }
-.header {
+.headerI, .headerO {
     font-size: 20px;
 }
 
@@ -203,4 +203,9 @@ tr{
 
 #resumeButton {
     display: none;
+}
+
+.glowica {
+    color: yellow;
+    font-size: 30px;
 }
