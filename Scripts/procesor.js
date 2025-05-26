@@ -16,18 +16,10 @@ let currentNumUpperIndex = 0;
 let output = 1;
 let stopProgram = false;
 
-const highlightColor = [
-  { backgrounColor: "red" },
-  { backgroundColor: "yellow" },
-  { backgroundColor: "red" },
-];
-
-const highlightOptions = {
-  duration: 400,
-  iterations: 1,
-};
-
 async function getInstructions(){
+    let inputHeaders = document.getElementsByClassName("headerI");
+    let outputHeaders = document.getElementsByClassName("headerO");
+
     for (i = 1; i <= instructionsAmount; i++){
         let rowLable = document.getElementById(`label${i}`).innerText;    
         let OptionsInstruction = document.getElementById(`instruction${i}`);
@@ -140,6 +132,8 @@ async function getInstructions(){
                 case "READ":
                     let inputValue = document.getElementById('input' + currentInputCell);
                     if (inputValue) setValue(currArgument, inputValue.value);
+                    inputHeaders[currentInputCell-1].classList.remove("glowica");
+                    inputHeaders[currentInputCell].classList.add("glowica");
                     currentInputCell++;
                     writeRaport(currentNum, currInstruction, currArgument, acumulatorValue);
                     await sleep(1000);
@@ -148,6 +142,8 @@ async function getInstructions(){
                     let outputValue = getValue(currArgument);
                     let outputX = document.getElementById('output' + output);
                     if (outputX) outputX.value = outputValue;
+                    outputHeaders[output-1].classList.remove("glowica");
+                    outputHeaders[output].classList.add("glowica");
                     output++;
                     writeRaport(currentNum, currInstruction, currArgument, acumulatorValue);
                     await sleep(1000);
