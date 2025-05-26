@@ -1,3 +1,3 @@
-Szymon - Procesor, Memory
-Artemiusz - Taśma wyjściowa, Edytor Programu
-Daniel - Taśma wejściowa, Górny pasek z funkcjami programu (Rozpoczęcie programu, Operacje na plikach, itd), animacje
+Szymon - Procesor, Memory, Euklides - NWD
+Artemiusz - Taśma wyjściowa, Edytor Programu, min-max
+Daniel - Taśma wejściowa, Górny pasek z funkcjami programu (Rozpoczęcie programu, Operacje na plikach, itd), animacje, Fibonacci

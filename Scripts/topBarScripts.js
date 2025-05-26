@@ -1,18 +1,12 @@
-const SAVE_BUTTON = document.getElementById("saveButton");
-const USE_FILE = document.getElementById("useFile");
-const STOP_BUTTON = document.getElementById("stopButton");
-const PAUSE_BUTTON = document.getElementById("pauseButton");
-
 function download() {
     var element = document.createElement('a');
 
     let inputSave = "";
-    let inputs = document.getElementsByClassName("cellI");
+    let inputs = document.querySelectorAll(".input");
+    console.log(inputs.length);
     for(let i = 0; i < inputs.length; i++) {
-      let value = inputs[i].querySelector(".inputCell").querySelector(".input").value;
-      if(value != "") {
-        inputSave += value + ";";
-      }
+      let value = inputs[i].value; 
+      inputSave += value + ";";
     }
 
 
