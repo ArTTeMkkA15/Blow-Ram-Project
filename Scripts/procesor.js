@@ -10,7 +10,7 @@ class Instruction {
 const START_BUTTON = document.getElementById("startButton");
 let instructionArray = [];
 let currentInputCell = 1;
-let acumulatorValue = null;
+let acumulatorValue = 1;
 let currentNum = 1;
 let currentNumUpperIndex = 0;
 let output = 1;
@@ -42,8 +42,12 @@ function setValue(argument, value) {
     }
 }
 
-function JUMP(instructionArray, startIndex, targetLabel) {
-    for (let i = startIndex; i < instructionArray.length; i++) {
+function writeRaport(instruction, acumulatorValue, line){
+    console.log("line of code: " + line + "\nAcomulator: " + acumulatorValue + "\nOperation: " + instruction);
+}
+
+function JUMP(instructionArray, targetLabel) {
+    for (let i = 1; i < instructionArray.length; i++) {
         console.log(instructionArray[i].label);
         if (instructionArray[i].label == targetLabel) {
             return i;
@@ -80,7 +84,7 @@ START_BUTTON.addEventListener("click", function getInstructions(){
 
             if (currInstruction == "JUMP" && currArgument != ""){
                 console.log("FOUND SIMPLE JUMP COMAND");
-                let index = JUMP(instructionArray, currentNum, currArgument);
+                let index = JUMP(instructionArray, currArgument);
                 if (index !== -1) {
                     console.log("JUMP COMAND COMPLEAT SUCCSSESFULLY");
                     currentNum = index;
@@ -91,7 +95,7 @@ START_BUTTON.addEventListener("click", function getInstructions(){
             if (currInstruction == "JGTZ" && currArgument != ""){
                 console.log("FOUND JGTZ COMAND");
                 if (acumulatorValue > 0){
-                    let index = JUMP(instructionArray, currentNum, currArgument);
+                    let index = JUMP(instructionArray, currArgument);
                     if (index !== -1) {
                         console.log("JGTZ COMAND COMPLEAT SUCCSSESFULLY");
                         currentNum = index;
@@ -106,7 +110,7 @@ START_BUTTON.addEventListener("click", function getInstructions(){
             if (currInstruction == "JZERO" && currArgument != ""){
                 console.log("FOUND JZERO COMAND");
                 if (acumulatorValue == 0){
-                    let index = JUMP(instructionArray, currentNum, currArgument);
+                    let index = JUMP(instructionArray, currArgument);
                     if (index !== -1) {
                         console.log("JZERO COMAND COMPLEAT SUCCSSESFULLY");
                         currentNum = index;
@@ -125,39 +129,48 @@ START_BUTTON.addEventListener("click", function getInstructions(){
                 case "LOAD":
                     setValue("0", getValue(currArgument));
                     acumulatorValue = getValue(currArgument);
+                    writeRaport(currInstruction, acumulatorValue, currentNum);
                     break;
                 case "STORE":
                     setValue(currArgument, getValue("0"));
+                    writeRaport(currInstruction, acumulatorValue, currentNum);
                     break;
                 case "ADD":
                     setValue("0", getValue("0") + getValue(currArgument));
                     acumulatorValue = getValue("0");
+                    writeRaport(currInstruction, acumulatorValue, currentNum);
                     break;
                 case "SUB":
                     setValue("0", getValue("0") - getValue(currArgument));
                     acumulatorValue = getValue("0");
+                    writeRaport(currInstruction, acumulatorValue, currentNum);
                     break;
                 case "MULT":
                     setValue("0", getValue("0") * getValue(currArgument));
                     acumulatorValue = getValue("0");
+                    writeRaport(currInstruction, acumulatorValue, currentNum);
                     break;
                 case "DIV":
                     setValue("0", Math.floor(getValue("0") / getValue(currArgument)));
                     acumulatorValue = getValue("0");
+                    writeRaport(currInstruction, acumulatorValue, currentNum);
                     break;
                 case "READ":
                     let inputValue = document.getElementById('input' + currentInputCell);
                     if (inputValue) setValue(currArgument, inputValue.value);
                     currentInputCell++;
+                    writeRaport(currInstruction, acumulatorValue, currentNum);
                     break;
                 case "WRITE":
                     let outputValue = getValue(currArgument);
                     let outputX = document.getElementById('output' + output);
                     if (outputX) outputX.value = outputValue;
+                    writeRaport(currInstruction, acumulatorValue, currentNum);
                     output++;
                     break;
                 case "HALT":
                     currentNum = instructionsAmount + 1;
+                    writeRaport(currInstruction, acumulatorValue, currentNum);
                     break;
             }
             currentNum++;
