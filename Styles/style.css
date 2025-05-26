@@ -149,7 +149,7 @@ main {
     display: flex;
     align-items: center;
 }
-.input {
+.input, .output {
     padding: 3px;
     height: 80%;
 }

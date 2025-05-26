@@ -6,12 +6,12 @@ function createOutputCells() {
     let cells = document.querySelector("#outputCells");
     for(let i = 1; i <= 99; i++) {
         let cell = document.createElement("div");
-        cell.className = "cell";
+        cell.className = "cellO";
         cell.id = "o"+i;
 
         let input = document.createElement("input");
         let inputCell = document.createElement("div");
-        input.className = "input";
+        input.className = "output";
         inputCell.className = "inputCell";
 
         let header = document.createElement("h3");
@@ -35,7 +35,7 @@ function createInputCells() {
     let cells = document.querySelector("#inputCells");
     for(let i = 1; i <= 99; i++) {
         let cell = document.createElement("div");
-        cell.className = "cell";
+        cell.className = "cellI";
         cell.id = "i"+i;
 
         let input = document.createElement("input");
@@ -277,16 +277,16 @@ function getFile() {
     });
     for(let i = 0; i<infoArr.length; i++) {
       if(i == 0) {
-        let inputs = document.getElementsByClassName("cellI");
-        for(let j = 0; j < inputs.length; j++) {
-          inputs[j].querySelector(".inputCell").querySelector(".input").value = infoArr[i][j];
-        } 
+        let inputs = document.querySelectorAll(".input");
+        for(let j = 1; j < inputs.length-1; j++) {
+          document.getElementById("input" + (j)).value = infoArr[0][j-1];
+        }
       }else if (i <= rowsL) {
         rows[i-1].querySelector("#label" + (i)).innerText = infoArr[i][0];
         rows[i-1].querySelector("#instruction" + (i)).selectedIndex = infoArr[i][1];
         rows[i-1].querySelector("#argument" + (i)).innerText = infoArr[i][2];
         rows[i-1].querySelector("#comment" + (i)).innerText = infoArr[i][3];
-      }else if (i > rowsL) {
+      } else if (i > rowsL) {
         let tbody = document.querySelector(".codeTable").getElementsByTagName("tbody")[0];
         instructionsAmount++;
         console.log(instructionsAmount);
