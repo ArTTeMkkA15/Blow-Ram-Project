@@ -200,3 +200,7 @@ tr{
     height: 500px;
     overflow-y: scroll;
 }
+
+#resumeButton {
+    display: none;
+}
