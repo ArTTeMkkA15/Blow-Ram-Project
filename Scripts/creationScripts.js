@@ -86,6 +86,7 @@ function createEditorProgram() {
 
     let row = document.createElement("tr");
     row.className = "row";
+    row.id = `row${instructionsAmount}`;
         
     let lnCell = document.createElement("td");
     lnCell.innerText = instructionsAmount; 
@@ -125,12 +126,18 @@ function createEditorProgram() {
     addRowButton.innerHTML = "+";
     programDiv.appendChild(addRowButton);
 
+    let delRowButton = document.createElement("button");
+    delRowButton.className = "addButton";
+    delRowButton.innerHTML = "-";
+    programDiv.appendChild(delRowButton);
+
 
     addRowButton.addEventListener("click", function(){
         instructionsAmount++;
         console.log(instructionsAmount);
         let row = document.createElement("tr");
         row.className = "row";
+        row.id = `row${instructionsAmount}`;
         
         let lnCell = document.createElement("td");
         lnCell.innerText = instructionsAmount; 
@@ -161,6 +168,15 @@ function createEditorProgram() {
         row.appendChild(commentCell);
         
         tbody.appendChild(row);
+    });
+    
+    delRowButton.addEventListener("click", function(){
+        if (instructionsAmount > 1){
+            rowToDelet = document.getElementById(`row${instructionsAmount}`);
+            rowToDelet.remove();
+            instructionsAmount--;
+            console.log(instructionsAmount);
+        }
     });
 }
 
