@@ -30,7 +30,11 @@ async function getInstructions(){
     }
 
     console.log(instructionArray);
-
+    currentInputCell = 1;
+    acumulatorValue = 0;
+    currentNum = 1;
+    output = 1;
+    stopProgram = false;
     while (currentNum <= instructionsAmount) {
 
         if (stopProgram) {
