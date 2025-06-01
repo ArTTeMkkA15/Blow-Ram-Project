@@ -19,6 +19,14 @@ let stopProgram = false;
 async function getInstructions(){
     let inputHeaders = document.getElementsByClassName("headerI");
     let outputHeaders = document.getElementsByClassName("headerO");
+    for(let i = 0; i < inputHeaders.length; i++) {
+        inputHeaders[i].classList.remove("glowica");
+    }
+    inputHeaders[0].classList.add("glowica");
+    for(let i = 0; i < outputHeaders.length; i++) {
+        outputHeaders[i].classList.remove("glowica");
+    }
+    outputHeaders[0].classList.add("glowica");
 
     for (i = 1; i <= instructionsAmount; i++){
         let rowLable = document.getElementById(`label${i}`).innerText;    
