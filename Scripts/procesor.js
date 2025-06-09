@@ -17,6 +17,10 @@ let output = 1;
 let stopProgram = false;
 
 async function getInstructions(){
+    let outputs = document.getElementsByClassName("output");
+    for(let i = 0; i < outputs.length; i++) {
+        outputs[i].value = "";
+    }
     let inputHeaders = document.getElementsByClassName("headerI");
     let outputHeaders = document.getElementsByClassName("headerO");
     for(let i = 0; i < inputHeaders.length; i++) {
