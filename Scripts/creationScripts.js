@@ -177,6 +177,9 @@ function createEditorProgram() {
             instructionsAmount--;
             console.log(instructionsAmount);
         }
+        else {
+            console.log(instructionsAmount + " Out of bounc for deletion!!!");
+        }
     });
 }
 
@@ -279,75 +282,74 @@ function readMemory(){
 
 
 function getFile() {
-  let infoArr = [];
-  const input = document.getElementById('fileUpload');
-  let file = input.files[0];
-  let fr = new FileReader();
-  fr.readAsText(file);
-  fr.onload = () => {
-    let rows = document.querySelectorAll(".row");
-    let rowsL = rows.length;
-    let lines = fr.result.split("\n");
-    lines.splice(-1);
-    lines.forEach(line => {
-      let info = line.split(";");
-      infoArr.push(info);
-    });
-    for(let i = 0; i<infoArr.length; i++) {
-      if(i == 0) {
-        let inputs = document.querySelectorAll(".input");
-        for(let j = 1; j < inputs.length-1; j++) {
-          document.getElementById("input" + (j)).value = infoArr[0][j-1];
+    let infoArr = [];
+    const input = document.getElementById('fileUpload');
+    let file = input.files[0];
+    let fr = new FileReader();
+    fr.readAsText(file);
+    fr.onload = () => {
+        let rows = document.querySelectorAll(".row");
+        for(let i = 0; i < rows.length; i++) {
+            rows[i].remove();
+            instructionsAmount--;
         }
-      }else if (i <= rowsL) {
-        rows[i-1].querySelector("#label" + (i)).innerText = infoArr[i][0];
-        rows[i-1].querySelector("#instruction" + (i)).selectedIndex = infoArr[i][1];
-        rows[i-1].querySelector("#argument" + (i)).innerText = infoArr[i][2];
-        rows[i-1].querySelector("#comment" + (i)).innerText = infoArr[i][3];
-      } else if (i > rowsL) {
-        let tbody = document.querySelector(".codeTable").getElementsByTagName("tbody")[0];
-        instructionsAmount++;
-        console.log(instructionsAmount);
-        let row = document.createElement("tr");
-        row.className = "row";
-        
-        let lnCell = document.createElement("td");
-        lnCell.innerText = instructionsAmount; 
-        row.appendChild(lnCell);
-        
-        let labelCell = document.createElement("td");
-        labelCell.id = `label${instructionsAmount}`;
-        labelCell.contentEditable = "true";
-        labelCell.innerText = infoArr[i][0];
-        row.appendChild(labelCell);
-    
-        let selectInst = document.createElement("select");
-        selectInst.id = `instruction${instructionsAmount}`;
-        INSTRUCTIONS.forEach(instruction => {
-            let optionInst = document.createElement("option");
-            optionInst.innerHTML = instruction;
-            selectInst.appendChild(optionInst);
+        let lines = fr.result.split("\n");
+        lines.splice(-1);
+        lines.forEach(line => {
+        let info = line.split(";");
+        infoArr.push(info);
         });
-        selectInst.selectedIndex = infoArr[i][1];
-        row.appendChild(selectInst);
-    
-        let argumentCell = document.createElement("td");
-        argumentCell.id = `argument${instructionsAmount}`;
-        argumentCell.contentEditable = "true";
-        argumentCell.innerText = infoArr[i][2];
-        row.appendChild(argumentCell);
-    
-        let commentCell = document.createElement("td");
-        commentCell.contentEditable = "true";
-        commentCell.id = `comment${instructionsAmount}`;
-        commentCell.innerText = infoArr[i][3];
-        row.appendChild(commentCell);
-        
-        tbody.appendChild(row);
-      }
+        for(let i = 0; i<infoArr.length; i++) {
+            if(i == 0) {
+                let inputs = document.querySelectorAll(".input");
+                for(let j = 1; j < inputs.length-1; j++) {
+                document.getElementById("input" + (j)).value = infoArr[0][j-1];
+                }
+            }else {
+                let tbody = document.querySelector(".codeTable").getElementsByTagName("tbody")[0];
+                instructionsAmount++;
+                console.log(instructionsAmount);
+                let row = document.createElement("tr");
+                row.className = "row ";
+                row.id = "row"+instructionsAmount;
+                
+                let lnCell = document.createElement("td");
+                lnCell.innerText = instructionsAmount; 
+                row.appendChild(lnCell);
+                
+                let labelCell = document.createElement("td");
+                labelCell.id = `label${instructionsAmount}`;
+                labelCell.contentEditable = "true";
+                labelCell.innerText = infoArr[i][0];
+                row.appendChild(labelCell);
+            
+                let selectInst = document.createElement("select");
+                selectInst.id = `instruction${instructionsAmount}`;
+                INSTRUCTIONS.forEach(instruction => {
+                    let optionInst = document.createElement("option");
+                    optionInst.innerHTML = instruction;
+                    selectInst.appendChild(optionInst);
+                });
+                selectInst.selectedIndex = infoArr[i][1];
+                row.appendChild(selectInst);
+            
+                let argumentCell = document.createElement("td");
+                argumentCell.id = `argument${instructionsAmount}`;
+                argumentCell.contentEditable = "true";
+                argumentCell.innerText = infoArr[i][2];
+                row.appendChild(argumentCell);
+            
+                let commentCell = document.createElement("td");
+                commentCell.contentEditable = "true";
+                commentCell.id = `comment${instructionsAmount}`;
+                commentCell.innerText = infoArr[i][3];
+                row.appendChild(commentCell);
+                
+                tbody.appendChild(row);
+            }
+        }
     }
-  }
-  fr.onerror = () => {
-    alert(fr.error);
-  }
+    fr.onerror = () => {
+        alert(fr.error);
+    }
 }
