@@ -3,7 +3,6 @@ function download() {
 
     let inputSave = "";
     let inputs = document.querySelectorAll(".input");
-    console.log(inputs.length);
     for(let i = 0; i < inputs.length; i++) {
       let value = inputs[i].value; 
       inputSave += value + ";";
@@ -19,7 +18,6 @@ function download() {
       let comm = rows[i].querySelector("#comment" + (i+1)).innerText;
       programSave += label + ";" + instr + ";" + arg + ";" + comm + "\n";
     }
-    
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(inputSave + "\n" + programSave));
     element.setAttribute('download', "test");
   
